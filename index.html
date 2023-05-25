@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doc</title>
+    <title>Registrar Alumno</title>
 </head>
 <body>
-    <label for="nombre">Nombre:</label>
-    <input type="text" id="nombre"><br>
-    <label for="email">Email:</label>
-    <input type="email" id="email"><br>
-    <button id="btn">Enviar</button>
-    <p id="demo"></p>
-    <script>
-        document.getElementById('btn').addEventListener('click',guardar_datos)
-        function guardar_datos(){
-            document.getElementById('demo').innerHTML = 'Datos guardados'
-        }
-    </script>
+    <form id="formulario">
+        <h1>Formulario de registro de Alumno</h1>
+        <input id="nombre" type="text" placeholder="Ingrese Nombre"><br>
+
+        <input id="edad" type="number" placeholder="Ingrese la Edad"><br>
+
+        <label for="fnacimiento">Indique su fecha de nacimiento</label><br>
+        <input id="fnacimiento" type="date"><br>
+
+        <input id="email" type="email" placeholder="Ingrese Email"><br>
+
+        <input id="telefono" type="tel" placeholder="Ingrese numero de contacto"><br>
+
+        <label for="documentoRsh">Documento de RSH (Registro Social de Hogares)</label><br>
+        <input id="documentoRsh" type="file"><br>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="script.js"></script>
 </body>
 </html>
