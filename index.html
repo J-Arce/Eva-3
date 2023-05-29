@@ -13,17 +13,22 @@
 
         <input id="edad" type="number" placeholder="Ingrese la Edad"><br>
 
-        <label for="fnacimiento">Indique su fecha de nacimiento</label><br>
-        <input id="fnacimiento" type="date"><br>
+        <label for="fNacimiento">Indique su fecha de nacimiento</label><br>
+        <input id="fNacimiento" type="date"><br>
 
         <input id="email" type="email" placeholder="Ingrese Email"><br>
 
         <input id="telefono" type="tel" placeholder="Ingrese numero de contacto"><br>
 
-        <label for="documentoRsh">Documento de RSH (Registro Social de Hogares)</label><br>
-        <input id="documentoRsh" type="file"><br>
+        <label for="genero">Indique su genero</label><br>
+        <select id="genero">
+            <option value="otro">Prefiero no decir</option>
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+        </select><br>
 
-        <button type="submit">Enviar</button>
+        <button id="btn" type="button">Enviar</button>
+        
     </form>
 
     <script src="script.js"></script>
