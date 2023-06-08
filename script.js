@@ -1,29 +1,41 @@
-var registrar = () =>{
-    let econtenedorTabla = document.getElementById("contenedorTabla");
+var modificar = (listaNueva)=>{
     let eNombre = document.getElementById('nombre');
     let eEdad = document.getElementById('edad');
     let eFNacimiento = document.getElementById('fNacimiento');
     let eEmail = document.getElementById('email');
     let eTelefono = document.getElementById('telefono');
     let eGenero = document.getElementById('genero');
+    let eBtnEditarUp = document.getElementById('btnEditar');
+
     let nombre = eNombre.value;
     let edad = eEdad.value;
     let fNacimiento = eFNacimiento.value;
     let email = eEmail.value;
     let telefono = eTelefono.value;
     let genero = eGenero.value;
-    let alumno = {"nombre":nombre, "edad":edad, "fNacimiento":fNacimiento, "email":email, "telefono":telefono, "genero":genero};
-    let listaAlumnos = localStorage.getItem('alumnos');
-    let listaAntigua = JSON.parse(listaAlumnos);
-    if(listaAntigua == null){
-        listaNueva = [alumno];
-    }
-    else{
-        listaNueva = [...listaAntigua, alumno];
-    }
-    console.log(listaAntigua);
-    console.log(listaNueva);
+    let indice = eBtnEditarUp.value;
+
+    listaNueva[indice].nombre = nombre;
+    listaNueva[indice].edad = edad;
+    listaNueva[indice].fNacimiento = fNacimiento;
+    listaNueva[indice].email = email;
+    listaNueva[indice].telefono = telefono;
+    listaNueva[indice].genero = genero;
+
     localStorage.setItem('alumnos',JSON.stringify(listaNueva));
+
+    cargarTabla(listadoNuevo)
+}
+
+var cargarTabla = (listaNueva)=>{
+    let econtenedorTabla = document.getElementById('contenedorTabla');
+    let eNombre = document.getElementById("nombre");
+    let eEdad = document.getElementById("edad");
+    let eFNacimiento = document.getElementById("fNacimiento");
+    let eEmail = document.getElementById("email");
+    let eTelefono = document.getElementById("telefono");
+    let eGenero = document.getElementById("genero");
+
     render = "<table>"
     render += "<tr><th>Nombre</th><th>Edad</th><th>Fecha Nacimiento</th><th>Email</th><th>Telefono</th><th>Genero</th><th>Accion</th></tr>"
     for (let i = 0; i < listaNueva.length; i++) {
@@ -45,9 +57,65 @@ var registrar = () =>{
     econtenedorTabla.innerHTML = render;
     for (let i = 0; i < listaNueva.length; i++) {
         var eBtn = document.getElementById("btnEditar"+i);
+        var eBtn2 = document.getElementById("btnEliminar"+i)
         let element = listaNueva[i];
-        eBtn.addEventListener('click',()=>{alert("Hola "+element.nombre+" Edad: "+element.edad+" que nacio el "+element.fNacimiento+" que su email es: "+element.email+", su numero es: "+element.telefono+" y su genero es: "+element.genero)})
+        eBtn.addEventListener('click',()=>{
+            eNombre.value = element.nombre;
+            eEdad.value = element.edad;
+            eFNacimiento.value = element.fNacimiento;
+            eEmail.value = element.email;
+            eTelefono.value = element.telefono;
+            eGenero.value = element.genero;
+            let sEditar = "<button type='button' id='btnEditar' value='"+i+"'>Editar</button>";
+            let contenedorBoton = document.getElementById('contenedorBtnExtra');
+            contenedorBoton.innerHTML = sEditar;
+            let eBtnEditarUp = document.getElementById('btnEditar');
+            eBtnEditarUp.addEventListener('click',()=>modificar(listaNueva))
+        })
+        eBtn2.addEventListener('click',()=>{
+            eNombre.value = element.nombre;
+            eEdad.value = element.edad;
+            eFNacimiento.value = element.fNacimiento;
+            eEmail.value = element.email;
+            eTelefono.value = element.telefono;
+            eGenero.value = element.genero;
+            let sEliminar = "<button type='button' id='btnEliminar' value='"+i+"'></button>";
+            let contenedorBoton = document.getElementById('contenedorBtnExtra');
+            contenedorBoton.innerHTML = sEliminar;
+            let eBtnEliminarUp = document.getElementById('btneliminar');
+            eBtnEliminarUp.addEventListener('click',()=>eliminar(listaNueva));
+        })
     }
 }
 
+var registrar = () =>{
+    let eNombre = document.getElementById('nombre');
+    let eEdad = document.getElementById('edad');
+    let eFNacimiento = document.getElementById('fNacimiento');
+    let eEmail = document.getElementById('email');
+    let eTelefono = document.getElementById('telefono');
+    let eGenero = document.getElementById('genero');
+    let nombre = eNombre.value;
+    let edad = eEdad.value;
+    let fNacimiento = eFNacimiento.value;
+    let email = eEmail.value;
+    let telefono = eTelefono.value;
+    let genero = eGenero.value;
+    //let alumno = {"nombre":nombre, "edad":edad, "fNacimiento":fNacimiento, "email":email, "telefono":telefono, "genero":genero};
+    let listaAlumnos = localStorage.getItem('alumnos');
+    let listaAntigua = JSON.parse(listaAlumnos);
+    if(listaAntigua == null){
+        let alumno = {"id":0, "nombre":nombre, "edad":edad, "fNacimiento":fNacimiento, "email":email, "telefono":telefono, "genero":genero}
+        listaNueva = [alumno];
+    }
+    else{
+        let alumno = {"id":listaAntigua.length, "nombre":nombre, "edad":edad, "fNacimiento":fNacimiento, "email":email, "telefono":telefono, "genero":genero}
+        listaNueva = [...listaAntigua, alumno];
+    }
+    console.log(listaAntigua);
+    console.log(listaNueva);
+    localStorage.setItem('alumnos',JSON.stringify(listaNueva));
+    
+    cargarTabla(listaNueva)
+}
 document.getElementById('btn').addEventListener('click', registrar)
