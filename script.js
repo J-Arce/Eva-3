@@ -24,7 +24,17 @@ var modificar = (listaNueva)=>{
 
     localStorage.setItem('alumnos',JSON.stringify(listaNueva));
 
-    cargarTabla(listadoNuevo)
+    cargarTabla(listaNueva)
+}
+
+var eliminar = (listaNueva)=>{
+    let eBtnEliminarUp = document.getElementById('btnEliminar');
+    let indice = eBtnEliminarUp.value;
+    lista = listaNueva.filter((a)=>a.id!=indice)
+    lista = lista.map((a,index)=>{return{...a,'id':index}})
+
+    localStorage.setItem('alumnos',JSON.stringify(lista));
+    cargarTabla(lista)
 }
 
 var cargarTabla = (listaNueva)=>{
@@ -49,7 +59,7 @@ var cargarTabla = (listaNueva)=>{
         render += "<td>"+element.genero+"</td>"
         render += "<td>"
         render += "<button id='btnEditar"+i+"'>Editar</button>"
-        render += "<button>Eliminar</button>"
+        render += "<button id='btnEliminar"+i+"'>Eliminar</button>"
         render += "</td>"
         render += "</tr>"
     }
@@ -79,10 +89,10 @@ var cargarTabla = (listaNueva)=>{
             eEmail.value = element.email;
             eTelefono.value = element.telefono;
             eGenero.value = element.genero;
-            let sEliminar = "<button type='button' id='btnEliminar' value='"+i+"'></button>";
+            let sEliminar = "<button type='button' id='btnEliminar' value='"+i+"'>Eliminar</button>";
             let contenedorBoton = document.getElementById('contenedorBtnExtra');
             contenedorBoton.innerHTML = sEliminar;
-            let eBtnEliminarUp = document.getElementById('btneliminar');
+            let eBtnEliminarUp = document.getElementById('btnEliminar');
             eBtnEliminarUp.addEventListener('click',()=>eliminar(listaNueva));
         })
     }
@@ -118,4 +128,12 @@ var registrar = () =>{
     
     cargarTabla(listaNueva)
 }
-document.getElementById('btn').addEventListener('click', registrar)
+
+var cargarDatos = ()=>{
+    let listaAlumnos = localStorage.getItem('alumnos');
+    let listaAntigua = JSON.parse(listaAlumnos);
+    cargarTabla(listaAntigua)
+}
+
+document.getElementById('btn').addEventListener('click', registrar);
+addEventListener('load',cargarDatos)
