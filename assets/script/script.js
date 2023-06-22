@@ -1,3 +1,19 @@
+var contraste = ()=>{
+    let btn = document.getElementById('btnContraste');
+    if(btn.value == '0'){
+        let elements = document.getElementsByClassName('blanco');
+        elements[0].classList.add('negro');
+        elements[0].classList.remove('blanco');
+        btn.value = '1';
+    }
+    else if(btn.value == '1'){
+        let elements = document.getElementsByClassName('negro');
+        elements[0].classList.add('blanco');
+        elements[0].classList.remove('negro');
+        btn.value = '0';
+    }
+}
+
 var modificar = (listaNueva)=>{
     let eNombre = document.getElementById('nombre');
     let eEdad = document.getElementById('edad');
@@ -134,6 +150,8 @@ var cargarDatos = ()=>{
     let listaAntigua = JSON.parse(listaAlumnos);
     cargarTabla(listaAntigua)
 }
+
+document.getElementById('btnContraste').addEventListener('click',contraste);
 
 document.getElementById('btn').addEventListener('click', registrar);
 addEventListener('load',cargarDatos)
