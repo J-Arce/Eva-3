@@ -6,3 +6,12 @@
     color: black;
     background-color: white;
 }
+.small-letras{
+    font-size: 12px;
+}
+.medium-letras{
+    font-size: 16px;
+}
+.large-letras{
+    font-size: 18px;
+}

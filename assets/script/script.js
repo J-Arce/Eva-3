@@ -13,7 +13,39 @@ var contraste = ()=>{
         btn.value = '0';
     }
 }
-
+var fuente = ()=>{
+    let btn = document.getElementById('btnFuente');
+    if(btn.value == '0'){
+        let elements = document.getElementsByClassName('small-letras');
+        const largo = elements.length;
+        for (let i = 0; i < largo; i++) {
+            const element = elements[0];
+            element.classList.add('medium-letras')
+            element.classList.remove('small-letras')
+        }
+        btn.value = '1'
+    }
+    else if(btn.value == '1'){
+        let elements = document.getElementsByClassName('medium-letras');
+        const largo = elements.length;
+        for (let i = 0; i < largo; i++) {
+            const element = elements[0];
+            element.classList.add('large-letras')
+            element.classList.remove('medium-letras')
+        }
+        btn.value = '2'
+    }
+    else if(btn.value == '2'){
+        let elements = document.getElementsByClassName('large-letras');
+        const largo = elements.length;
+        for (let i = 0; i < largo; i++) {
+            const element = elements[0];
+            element.classList.add('small-letras')
+            element.classList.remove('large-letras')
+        }
+        btn.value = '0'
+    }
+}
 var modificar = (listaNueva)=>{
     let eNombre = document.getElementById('nombre');
     let eEdad = document.getElementById('edad');
@@ -127,7 +159,6 @@ var registrar = () =>{
     let email = eEmail.value;
     let telefono = eTelefono.value;
     let genero = eGenero.value;
-    //let alumno = {"nombre":nombre, "edad":edad, "fNacimiento":fNacimiento, "email":email, "telefono":telefono, "genero":genero};
     let listaAlumnos = localStorage.getItem('alumnos');
     let listaAntigua = JSON.parse(listaAlumnos);
     if(listaAntigua == null){
@@ -152,6 +183,6 @@ var cargarDatos = ()=>{
 }
 
 document.getElementById('btnContraste').addEventListener('click',contraste);
-
+document.getElementById('btnFuente').addEventListener('click',fuente);
 document.getElementById('btn').addEventListener('click', registrar);
 addEventListener('load',cargarDatos)
